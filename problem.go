@@ -12,7 +12,7 @@ import (
 
 func main() {
 	FastSolve(os.Stdin, func(k *int64) {
-		fmt.Println(k)
+		fmt.Println(*k)
 	})
 }
 
@@ -54,8 +54,10 @@ func FastSolve(r io.Reader, displayer func(*int64)) {
 			found = true
 		} else if found {
 			if intOne == -1 {
+				// first number from the pair
 				intOne = num
 			} else {
+				// second number from the pair - solve and display
 				result := solveMe(&intOne, &num)
 				displayer(result)
 				intOne = -1
@@ -69,6 +71,7 @@ func FastSolve(r io.Reader, displayer func(*int64)) {
 		if intOne == -1 {
 			intOne = num
 		} else {
+			// second number from the pair - solve and display
 			result := solveMe(&intOne, &num)
 			displayer(result)
 		}

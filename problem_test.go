@@ -20,6 +20,20 @@ func Test_SlowSolve(t *testing.T) {
 	})
 }
 
+func Test_FastSolve(t *testing.T) {
+	// Arrange
+	reader := strings.NewReader("9223372036854775807 9223372036854775806\n5 12\n10 12\n1871293781758123 72784\n1 9223372036854775807")
+	expected := []int64{1, 7, 2, 1871293781685339, 9223372036854775806}
+	result := make([]int64, 0)
+
+	// Act
+	SlowSolve(reader, func(k *int64) {
+		result = append(result, *k)
+	})
+	// Assert
+	assert.Equal(t, expected, result)
+}
+
 func Benchmark_SlowSolve(b *testing.B) {
 	// Arrange
 	reader := strings.NewReader("9223372036854775807 9223372036854775806")
